@@ -1,0 +1,5 @@
+svmpath	compute the SVM solution path
+predict.svmpath	make predictions from the svmpath
+print.svmpath	print an svmpath object
+summary.svmpath	print a summary of an svmpath object
+radial.kernel	constructs a kernel for use by SvmPath
