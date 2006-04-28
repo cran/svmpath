@@ -54,7 +54,7 @@ and predict methods.}
 as the talk \url{http://www-stat.stanford.edu/~hastie/TALKS/svmpathtalk.pdf}.
 }
 \author{Trevor Hastie}
-\note{This algorithm does not use updating to solve the "elbow"
+\note{This implementation of the algorithm does not use updating to solve the "elbow"
   linear equations. This is possible, since the elbow changes by a small
   number of points at a time. Future version of the software will do
   this. The author has encountered numerical problems with early
@@ -66,7 +66,7 @@ as the talk \url{http://www-stat.stanford.edu/~hastie/TALKS/svmpathtalk.pdf}.
 \seealso{print, coef, summary, predict, and FilmPath}
 \examples{
 data(svmpath)
-attach(balanced.overlap)
+attach(unbalanced.separated)
 svmpath(x,y,trace=TRUE,plot=TRUE)
 detach(2)
 \dontrun{svmpath(x,y,kernel=radial.kernel,param.kernel=.8)}
