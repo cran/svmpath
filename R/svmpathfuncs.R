@@ -70,6 +70,24 @@ get.svmstep<-function(lambda,lambda.old){
       as.numeric(cut(-lambda,-lambda.cuts))-1
     }
       
+"InitsvmPath" <-
+  function(Rmat, cvec, const)
+  {
+    n <- length(cvec)
+    zsmall <- c(Rmat, cvec, const)
+    lenz <- length(zsmall)
+    sol <- .Fortran("qp",
+                    xn = as.double(rep(0,n+1)),
+                    n = as.integer(n),
+                    zsmall = as.double(zsmall),
+                    lenz = as.integer(lenz),
+                    inform = as.integer(0),
+                    PACKAGE="svmpath"
+                    )
+    if (sol$inform!=0) print("convergence warning in initialization\n")
+    list(alpha=sol$xn[1:n], obj=sol$zsmall[lenz])
+  }
+
 "modulus" <-
   function(x, n)
   n * (x/n - trunc(x/n))
@@ -89,31 +107,31 @@ OptInit.alpha<-function(mbig,msmall,Rmat,c.objective){
   alpha<-rep(1,mbig)*msmall/mbig
   storage.mode(alpha)<-"double"
   fit<-.Fortran("lssol",
-              as.integer(mbig),
-              as.integer(mbig),
-              as.integer(nclin),
-              as.integer(nclin),
-              as.integer(mbig),
-              a,
+              mn=as.integer(mbig),
+              n=as.integer(mbig),
+              nclin=as.integer(nclin),
+              ldA=as.integer(nclin),
+              ldR=as.integer(mbig),
+              A=a,
               bl,
               bu,
-              c.objective,
+              cvec=c.objective,
               istate=istate,
-              integer(mbig),
-              alpha=alpha,
-              Rmat,
-              double(mbig),
+              kx=integer(mbig),
+              x=as.double(alpha),
+              R=Rmat,
+              b=double(mbig),
               inform=integer(1),
               iter=integer(1),
               obj=double(1),
-              clambda=double(mbig+1),
+              clambda=double(mbig+nclin),
               iw=integer(mbig),
-              as.integer(mbig),
-              double(lenw),
-              as.integer(lenw),
+              leniw=as.integer(mbig),
+              w=double(lenw),
+              lenw=as.integer(lenw),
               PACKAGE="svmpath"
               )
-  list(alpha=fit$alpha,obj=fit$obj)
+  list(alpha=fit$x,obj=fit$obj)
 }
 "poly.kernel" <-
   function(x, y=x, param.kernel = 1)
@@ -125,7 +143,7 @@ OptInit.alpha<-function(mbig,msmall,Rmat,c.objective){
   else (x %*% t(y) + 1)^param.kernel
 }
 "predict.svmpath" <-
-  function(object,newx,lambda,type=c("function","class","alpha"),...){
+  function(object,newx,lambda,type=c("function","class","alpha","margin"),...){
     type<-match.arg(type)
     oalpha<-object$alpha
     oalpha0<-object$alpha0
@@ -169,6 +187,11 @@ OptInit.alpha<-function(mbig,msmall,Rmat,c.objective){
       if(missing(newx))newx<-object$x
       K<-object$kernel(newx,object$x,object$param.kernel)
       fit<-K%*%(alpha*object$y)
+      if(type=="margin"){
+        margin=(alpha*object$y)*fit
+        margin=apply(margin,2,sum)
+        margin=lambda/sqrt(margin)
+      }
       fit<- scale(fit,-alpha0,lambda)
       attr(fit,"scaled:center")<-NULL
       attr(fit,"scaled:scale")<-NULL
@@ -176,7 +199,8 @@ OptInit.alpha<-function(mbig,msmall,Rmat,c.objective){
     switch(type,
            "function"=fit,
            "class"=sign(fit),
-           alpha=object
+           alpha=object,
+           margin=margin
            )
   }
 PrintPath<-function(trace,step,obs,moveto,movefrom,lambda,digits,stats){
@@ -189,8 +213,8 @@ PrintPath<-function(trace,step,obs,moveto,movefrom,lambda,digits,stats){
 }
   invisible()
 }
-print.svmpath<-function(x,digits=6,...){
-  for( i in seq(x$Step)){
+print.svmpath<-function(x,digits=6,maxsteps=length(x$Step),...){
+  for( i in seq(maxsteps)){
     step<-x$Step[i]
     stats<-list(selbow=x$Size.Elbow[step],error=x$Error[step],margin=x$SumEps[step])
 PrintPath(TRUE,x$Step[i],x$Obs.step[i],x$Moveto[i],x$Movefrom[i],x$lambda[step],digits,stats)
@@ -199,7 +223,7 @@ PrintPath(TRUE,x$Step[i],x$Obs.step[i],x$Moveto[i],x$Movefrom[i],x$lambda[step],
 }
   
 "radial.kernel" <-
-  function(x, y=x, param.kernel = 1)
+  function(x, y=x, param.kernel = 1/p)
 {
 
   ###Note param.kernel is now gamma 
@@ -260,10 +284,10 @@ if(!linear.plot){
     invisible()
     
 }
-SolveKstar<-function(Kstar,eps=.0001){
+SolveKstar<-function(Kstar,eps=1e-10){
   onestar<-rep(1,ncol(Kstar))
   onestar[1]<-0
-#  solve(Kstar+diag(length(onestar))*eps,onestar)
+ # solve(Kstar+diag(length(onestar))*eps,onestar) #goes wrong
 solve(Kstar,onestar)
 }
 StatPath<-function(f,y,Elbow){
@@ -380,7 +404,8 @@ summary.svmpath<-function(object,nsteps=5,digits=6,...){
       b <- bstar[-1]
 ### Now find the first event
 ### Check for immobile margin
-      gl <- K[, Elbow] %*% (y[Elbow] * b) + b0
+      
+      gl <- K[, Elbow, drop=FALSE] %*% (y[Elbow] * b) + b0
       dl<-fl-gl
       immobile<-sum(abs(dl))/n < eps
 ### now check for exits from Elbow
@@ -394,6 +419,7 @@ summary.svmpath<-function(object,nsteps=5,digits=6,...){
 ### Check to see if we leave the margin when it is immobile
       if(immobile&(lambda.exit < eps))break
 ### Now check for entries
+
       if(!immobile){
       lambdai <- (lambda[k] * (dl))/(y - gl)
       lambdai[abs(y-gl)<eps]<- -Inf
@@ -491,8 +517,10 @@ pos.init<-function(K,y,nplus,nminus,eps){
   Kscript <- K * outer(y, y)	
   Rmat<-Kscript[Iplus,Iplus]
   c.objective<-Kscript[Iplus,Iminus]%*%rep(1,nminus)
-  
-  alpha.opt<-OptInit.alpha(nplus,nminus,Rmat,c.objective)$alpha
+  alpha.opt=InitsvmPath(Rmat,c.objective,nminus)$alpha
+### alpha.opt<-OptInit.alpha(nplus,nminus,Rmat,c.objective)$alpha# LSSOL wierd bug
+###alpha.opt<-new.init(nplus,nminus,Rmat,c.objective,eps*eps)#quadprog - unsatisfactory
+ 
   alpha<-rep(1,length(y))
   alpha[Iplus]<-alpha.opt
   

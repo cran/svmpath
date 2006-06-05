@@ -7,7 +7,8 @@
   class labels.
 }
 \usage{
-predict.svmpath(object, newx, lambda, type = c("function", "class", "alpha"),...)
+predict.svmpath(object, newx, lambda, type = c("function", "class",
+"alpha", "margin"),...)
 }
 \arguments{
   \item{object}{fitted \code{svmpath} object}
@@ -17,7 +18,7 @@ predict.svmpath(object, newx, lambda, type = c("function", "class", "alpha"),...
     \code{lambda} is equivalent to 1/C for the usual parametrization of
     a SVM}
   \item{type}{type of prediction, with default \code{"function"}. For
-    \code{type="alpha"} the  \code{newx} argument is not required}
+    \code{type="alpha"} or \code{type="margin"} the  \code{newx} argument is not required}
   \item{...}{Generic compatibility}
 }
 \details{

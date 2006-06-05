@@ -6,7 +6,7 @@
 compute the kernel matrix for svmpath
 }
 \usage{
-radial.kernel(x, y=x, param.kernel = 1)
+radial.kernel(x, y=x, param.kernel = 1/p)
 poly.kernel(x, y=x, param.kernel = 1)
 }
 %- maybe also 'usage' for other objects documented here.

@@ -5,11 +5,12 @@
 print a summary of the fitted svmpath object
 }
 \usage{
-print.svmpath(x, digits, ...)
+print.svmpath(x, digits, maxsteps, ...)
 }
 \arguments{
   \item{x}{object to be printed}
   \item{digits}{number of significant digits (default 6)}
+  \item{maxsteps}{the number of steps to print; default all}
   \item{...}{additional arguments to the generic print function}
   }
 \value{

@@ -7,6 +7,7 @@
  \alias{enlist}                   
  \alias{get.svmstep}              
  \alias{modulus}                  
+ \alias{InitsvmPath}            
  \alias{OptInit.alpha}            
  \alias{PrintPath}                
  \alias{SnapPath}                 
