@@ -7,7 +7,7 @@ methods gives a more concise description by picking out a subset of the
 steps
 }
 \usage{
-summary.svmpath(object, nsteps = 5, digits = 6, ...)
+\method{summary}{svmpath}(object, nsteps = 5, digits = 6, ...)
 }
 \arguments{
   \item{object}{the \code{svmpath} object}

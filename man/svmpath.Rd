@@ -17,7 +17,7 @@ svmpath(x, y, K, kernel.function = poly.kernel, param.kernel = 1, trace, plot.it
 \arguments{
   \item{x}{the data matrix (n x p) with n rows (observations) on p
     variables (columns)}
-  \item{y}{The {-1,+1} valued response variable.}
+  \item{y}{The "-1,+1" valued response variable.}
   \item{K}{a n x n kernel matrix, with default value \code{K= kernel.function(x, x)}}
   \item{kernel.function}{This is a user-defined function. Provided are
     \code{poly.kernel} (the default, with parameter set to default to a

@@ -1,13 +1,13 @@
 \name{predict.svmpath}
 \alias{predict.svmpath}
-\title{Make predictions from a svmpath object}
+\title{Make predictions from a "svmpath" object}
 \description{
   Provide a value for \code{lambda}, and produce the fitted lagrange \code{alpha}
   values. Provide values for \code{x}, and get fitted function values or
   class labels.
 }
 \usage{
-predict.svmpath(object, newx, lambda, type = c("function", "class",
+\method{predict}{svmpath}(object, newx, lambda, type = c("function", "class",
 "alpha", "margin"),...)
 }
 \arguments{

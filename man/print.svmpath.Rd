@@ -5,7 +5,7 @@
 print a summary of the fitted svmpath object
 }
 \usage{
-print.svmpath(x, digits, maxsteps, ...)
+\method{print}{svmpath}(x, digits, maxsteps, ...)
 }
 \arguments{
   \item{x}{object to be printed}
