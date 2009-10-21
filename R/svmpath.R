@@ -1,6 +1,6 @@
 "svmpath" <-
   function(x, y, K = kernel.function(x, x,param.kernel=param.kernel), kernel.function=poly.kernel,param.kernel=1, trace = FALSE, plot.it = FALSE,eps = 
-           1e-10, Nmoves = 3 * n, digits=6,lambda.min=1e-4,...)
+           1e-10, Nmoves = 3 * n, digits=6,lambda.min=1e-4,ridge=0,...)
 {
 ### Function to compute the entire SVM path of solutions for a two-class
 ### classification problem
@@ -87,7 +87,7 @@
       movefrom<-" ";moveto<-"E";obs<-Elbow
     }
     else{
-      bstar<-SolveKstar(Kstar,...)
+      bstar<-SolveKstar(Kstar,ridge=ridge,...)
       b0 <- bstar[1]
       b <- bstar[-1]
 ### Now find the first event
@@ -188,7 +188,7 @@
     if(plot.it)
     SnapPath(k,x, y,fl, alpha[, k], alpha0[k], lambda[k], Elbow, kernel.function,param.kernel, linear.plot,...)
   }
-  obj<-list(alpha=alpha[,seq(k)],alpha0=alpha0[seq(k)],lambda=lambda[seq(k)],alpha00=alpha00,Error=Error[seq(k)],SumEps=SumEps[seq(k)],
+  obj<-list(alpha=alpha[,seq(k),drop=FALSE],alpha0=alpha0[seq(k)],lambda=lambda[seq(k)],alpha00=alpha00,Error=Error[seq(k)],SumEps=SumEps[seq(k)],
             Size.Elbow=Size.Elbow[seq(k)],Elbow=Elbow.list[seq(k)],Moveto=Moveto[seq(move.counter)],Movefrom=Movefrom[seq(move.counter)],Obs.step=Obs.step[seq(move.counter)],Step=Step[seq(move.counter)],kernel=kernel.function,param.kernel=param.kernel,x=x,y=y,linear=linear.plot,call=this.call)
 class(obj)<-"svmpath"
   obj

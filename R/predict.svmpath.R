@@ -8,7 +8,14 @@
       alpha<-oalpha
       alpha0<-oalpha0
     }
-    else{
+    else if (length(object$lambda)==1){
+    warning("This model has only one lambda value; predictions at it are returned")
+    nlam=length(lambda)
+    lambda=rep(object$lambda,nlam)
+    alpha=oalpha[rep(1,nlam),,drop=FALSE]
+    alpha0=rep(oalpha0,nlam)
+  }
+  else{
       olambda<-object$lambda
       nalpha<-length(object$y)
       minl<-min(olambda);maxl<-max(olambda)

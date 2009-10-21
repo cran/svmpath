@@ -12,17 +12,17 @@ plot.svmpath=function(x,step=max(x$Step),Size=60,elbow.show=TRUE,support.show=TR
      }
   }
   f=predict(object,lambda=object$lambda[step],type="function")
-  Elbow=object$Elbow[[step]]
-  stats<-StatPath(y,f,Elbow)
   x=object$x
   y=object$y
+  Elbow=object$Elbow[[step]]
+  stats<-StatPath(y,f,Elbow)
   alpha=object$alpha[,step]
   alpha0=object$alpha0[step]
   lambda=object$lambda[step]
   linear.plot=object$linear
  ###only for 2 dim inputs
   if(dim(x)[2]>2){
-    warning("plot.svm intended for two-dimensional x; only forst two dimensions used")
+    warning("plot.svm intended for two-dimensional x; only first two dimensions used")
     x <- x[, 1:2]
   }
   n<-length(y)

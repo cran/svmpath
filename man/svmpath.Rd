@@ -6,13 +6,13 @@
 amount by which points overlap their soft margins. Typically either a
 default large value for C is chosen (allowing minimal overlap),
 or else a few values are compared
-using a valication set. This algorithm computes the entire
+using a validation set. This algorithm computes the entire
 regularization path (i.e. for all possible values of C for which the
 solution changes), with a cost a small (~3)  multiple of the cost of fitting a
 single model.
 }
 \usage{
-svmpath(x, y, K, kernel.function = poly.kernel, param.kernel = 1, trace, plot.it, eps = 1e-10, Nmoves = 3 * n, digits = 6, lambda.min = 1e-04, ...)
+svmpath(x, y, K, kernel.function = poly.kernel, param.kernel = 1, trace, plot.it, eps = 1e-10, Nmoves = 3 * n, digits = 6, lambda.min = 1e-04,ridge=0, ...)
 }
 \arguments{
   \item{x}{the data matrix (n x p) with n rows (observations) on p
@@ -33,8 +33,11 @@ svmpath(x, y, K, kernel.function = poly.kernel, param.kernel = 1, trace, plot.it
   \item{digits}{the number of digits in the printout}
   \item{lambda.min}{The smallest value of \code{lambda = 1/C}; default
     is \code{lambda=10e-4}, or \code{C=10000}}
+  \item{ridge}{Sometimes the algorithm encounters singularities; in this
+    case a small value of ridge, around 1e-12, can help. Default is \code{ridge=0}}
   \item{...}{additional arguments to some of the functions called by
-    svmpath. 
+    svmpath. One such argument that can be passed is \code{ridge} (default
+    is 1e-10). This is used to produce "stable" solutions to linear equations.
   }
 }
 \details{

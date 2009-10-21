@@ -1,7 +1,7 @@
 Package: svmpath
 Title: svmpath: the SVM Path algorithm
-Date: 20011-6-8
-Version: 0.95
+Date: 20011-10-10
+Version: 0.952
 Author: Trevor Hastie
 Description: Computes the entire regularization path for the two-class
         svm classifier with essentialy the same cost as a single SVM
@@ -9,6 +9,6 @@ Description: Computes the entire regularization path for the two-class
 Maintainer: Trevor Hastie <hastie@stanford.edu>
 License: GPL-2
 URL: http://www.jmlr.org/papers/volume5/hastie04a/hastie04a.pdf
-Packaged: 2011-06-08 19:14:52 UTC; hastie
+Packaged: 2012-10-29 08:59:54 UTC; ripley
 Repository: CRAN
-Date/Publication: 2011-06-09 06:04:57
+Date/Publication: 2012-10-29 08:59:54
