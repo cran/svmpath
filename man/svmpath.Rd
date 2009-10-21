@@ -12,7 +12,7 @@ solution changes), with a cost a small (~3)  multiple of the cost of fitting a
 single model.
 }
 \usage{
-svmpath(x, y, K, kernel.function = poly.kernel, param.kernel = 1, trace, plot.it, linear.plot, eps = 1e-10, Nmoves = 3 * n, digits = 6, lambda.min = 1e-04, ...)
+svmpath(x, y, K, kernel.function = poly.kernel, param.kernel = 1, trace, plot.it, eps = 1e-10, Nmoves = 3 * n, digits = 6, lambda.min = 1e-04, ...)
 }
 \arguments{
   \item{x}{the data matrix (n x p) with n rows (observations) on p
@@ -27,17 +27,15 @@ svmpath(x, y, K, kernel.function = poly.kernel, param.kernel = 1, trace, plot.it
     algorithm runs; default is \code{FALSE}}
   \item{plot.it}{a flag indicating whether a plot should be produced
     (default \code{FALSE}; only usable with \code{p=2}}
-  \item{linear.plot}{if \code{TRUE}, the plotting routine exploits the
-    knowledge that the solution is linear; otherwise a contour algorithm
-  is used. The default is \code{missing(kernel)} (i.e. \code{TRUE} if a
-  default linear kernel is used}
   \item{eps}{a small machine number which is used to identify minimal
     step sizes}
   \item{Nmoves}{the maximum number of moves}
   \item{digits}{the number of digits in the printout}
   \item{lambda.min}{The smallest value of \code{lambda = 1/C}; default
     is \code{lambda=10e-4}, or \code{C=10000}}
-  \item{...}{additional arguments to some of the functions called by svmpath}
+  \item{...}{additional arguments to some of the functions called by
+    svmpath. 
+  }
 }
 \details{
   The algorithm used in \code{svmpath()} is described in detail in

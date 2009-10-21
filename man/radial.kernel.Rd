@@ -6,8 +6,8 @@
 compute the kernel matrix for svmpath
 }
 \usage{
-radial.kernel(x, y=x, param.kernel = 1/p)
-poly.kernel(x, y=x, param.kernel = 1)
+radial.kernel(x, y=x, param.kernel = 1/p,...)
+poly.kernel(x, y=x, param.kernel = 1,...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -16,6 +16,7 @@ poly.kernel(x, y=x, param.kernel = 1)
   \item{param.kernel}{the parameter(s) for the kernel. For this radial
     kernel, the parameter is known in the fields as "gamma". For the
     polynomial kernel, it is the "degree"}
+  \item{\dots}{unused}
 }
 \details{
 For the radial kernel, this computes the function \eqn{\exp(-\gamma||x-y||^2)}{exp(-g||x-y||^2)} for each pair of rows x,y

@@ -1,5 +1,5 @@
 "radial.kernel" <-
-  function(x, y=x, param.kernel = 1/p)
+  function(x, y=x, param.kernel = 1/p,...)
 {
 
   ###Note param.kernel is now gamma 

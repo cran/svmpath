@@ -1,6 +1,6 @@
-SolveKstar<-function(Kstar,eps=1e-10){
+SolveKstar<-function(Kstar,ridge=0,...){
   onestar<-rep(1,ncol(Kstar))
   onestar[1]<-0
- # solve(Kstar+diag(length(onestar))*eps,onestar) #goes wrong
-solve(Kstar,onestar)
+  if(ridge>0) Kstar=Kstar+diag(length(onestar))*ridge
+  solve(Kstar,onestar)
 }

@@ -40,7 +40,7 @@ if(!linear.plot){
   }
   else{
       contour(xg[, 1], xg[, 2], fhat, levels = 0, add = TRUE, labels = "",col=3,lwd=3)
-      contour(xg[, 1], xg[, 2], fhat, levels = c(-1,1), add = TRUE, labels = c("",""),col=3,lwd=1)
+      contour(xg[, 1], xg[, 2], fhat, levels = c(-1,1), add = TRUE, labels = c("",""),col=3,lwd=2,lty=3)
     }
   if(movie)dev.off()
     invisible()
