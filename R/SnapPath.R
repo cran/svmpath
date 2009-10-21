@@ -21,7 +21,7 @@ if(!linear.plot){
       }
 
     plot(x[,  ], type = "n",xlab="X1",ylab="X2")
-   title(paste("              Step: ",format(step,digits=3),"   Error:",format(round(stats$error),digits=3), "   Elbow Size:",format(round(stats$selbow),digits=2),"   Margin:",format(round(stats$margin,2),digits=7)),adj=0)
+   title(paste("              Step: ",format(step,digits=3),"   Error:",format(round(stats$error),digits=3), "   Elbow Size:",format(round(stats$selbow),digits=2),"   Sum Eps:",format(round(stats$margin,2),digits=7)),adj=0)
     pointid <- seq(y)
     points(x[y == 1,  ], col = 2,pch="*",cex=2)
     points(x[y == -1,  ], col = 4,pch="*",cex=2)

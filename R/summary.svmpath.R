@@ -3,7 +3,7 @@ summary.svmpath<-function(object,nsteps=5,digits=6,...){
   cat(paste(deparse(object$call), sep = "\n", collapse = "\n"), 
         "\n\n", sep = "")
   N<-length(object$Error)
-  nsupp<-apply(object$alpha,2,function(x)sum(x>0))
+  nsupp<-apply(object$alpha,2,function(x)sum(x>1e-10))
   m<-sort(unique(c(pretty(seq(N),nsteps),1,N)))
   m<-seq(N)[match(m,seq(N),0)]
   cat("Number of steps:",N,"\n")
