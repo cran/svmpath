@@ -1,0 +1,9 @@
+balanced.overlap	12 observations in two dimensions, -1(6), +1(6)	
+balanced.separated	12 observations in two dimensions, -1(6), +1(6)
+unbalanced.separated	11 observations in two dimensions, -1(4), +1(7)
+mixture.data		200 observation in two dimensions, -1(100),+1(100)
+			these are the data used in Hastie, Tisbhirani
+			and Friedman's "Elements of Statistical
+			Learning", and are described in more detail on
+			the book webpage
+			http://www-stat.stanford.edu/ElemStatLearn 

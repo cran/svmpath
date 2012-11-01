@@ -1,6 +1,5 @@
 \name{svmpath-internal}
 \title{svm internal functions}
- \alias{.First.lib}               
  \alias{Balanced.Initialization}  
  \alias{coef.svmpath}             
  \alias{DowndateKstar}

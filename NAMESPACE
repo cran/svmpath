@@ -1,5 +1,14 @@
-# Default NAMESPACE created by R
-# Remove the previous line if you edit this file
+useDynLib("svmpath")
+importFrom(utils,head,tail,packageDescription)
+export(svmpath,
+summary.svmpath,radial.kernel,poly.kernel,print.svmpath,predict.svmpath,plot.svmpath,modulus,get.svmstep,enlist,coef.svmpath,UpdateKstar,Unbalanced.Initialization,StatPath,SolveKstar,SnapPath,PrintPath,OptInit.alpha,InitsvmPath,DowndateKstar,Balanced.Initialization)
 
-# Export all names
-exportPattern(".")
+S3method("print","svmpath")
+S3method("plot","svmpath")
+S3method("predict","svmpath")
+S3method("coef","svmpath")
+S3method("summary","svmpath")
+
+
+
+

@@ -1,7 +1,7 @@
 "SnapPath" <-
   function(step,x, y,f, alpha, alpha0, lambda, Elbow, kernel.function,param.kernel, linear.plot,Size=60,movie=FALSE,movie.root="./",...)
 {
-  if(movie)jpeg(file=paste(movie.root,step,".jpg",sep=""),quality=90,width=540,height=540,bg="wheat",...)
+  if(movie)jpeg(filename=paste(movie.root,step,".jpg",sep=""),quality=90,width=540,height=540,bg="wheat",...)
   stats<-StatPath(y,f,Elbow)
 ###only for 2 dim inputs
   x <- x[, 1:2]
