@@ -1,5 +1,5 @@
-4f5f91dc1fb6f3dce73d72a4b01b4d6a *DESCRIPTION
-4be5a06837370431809eb65e7947ac97 *NAMESPACE
+d7b9f90eff49900b0e155686a580c2c7 *DESCRIPTION
+ed0a9fb2a3cd0e937a010c65734d3d6f *NAMESPACE
 74c31856f7c262f61e112015c59f9107 *R/Balanced.Initialization.R
 ef9094d325a87b9c868042f2be1e4bb5 *R/DowndateKstar.R
 f3cc7b3edf536a0f7c3acf41bec68057 *R/InitsvmPath.R
@@ -14,7 +14,7 @@ e51c94b26cfec58f1149902b4ef3a921 *R/coef.svmpath.R
 5d175760dde17d2e972ab168b4252ca0 *R/enlist.R
 7ee9fdf9db2ff160d15d1d9eaf378bd1 *R/get.svmstep.R
 747221cbffaf5e979f493b3cde5a34fa *R/modulus.R
-e76da82aa02ca58367df6c071151071c *R/onLoad.R
+0298f36958c695a11c10a9eb375cac82 *R/onLoad.R
 1091e5f8ebbe1dbc28406125ad4a1f2b *R/plot.svmpath.R
 e6c2b0ac4c02f5567ab4b46d53a211d8 *R/poly.kernel.R
 d26b4673ce136d26092fd1746c16a366 *R/predict.svmpath.R
@@ -31,7 +31,7 @@ a01c8db7b4a3e2957ee148da182cb9c6 *man/plot.svmpath.Rd
 2ddbd16c6bbf43f5e62f8126c8962d08 *man/radial.kernel.Rd
 5306dc3039f477219df481513253a569 *man/summary.svmpath.Rd
 95b3e5efec6865a9f74bc497478f8deb *man/svmpath-internal.Rd
-e3f8de47ac39f6837c1aba5e0e9815c0 *man/svmpath.Rd
+a51d68c64c3493305fe21b73a346ddbe *man/svmpath.Rd
 1f5535c55eb12e01bd93aa28ed661fb3 *src/mi02lib.f
 236542cc602ba8900d1a289197062e92 *src/mi05funs.f
 7016ad529a2a72b2dc1ff6898b206f6a *src/mi10unix.f
@@ -54,4 +54,4 @@ c84cc9d5389a3d0ca4ce722eae314b6f *src/mi65rmod.f
 d7b3ee40028ab885d2597c7694d1fe4c *src/mi70nobj.f
 bcfd6307607dd8546f650073e7c5fbba *src/mi80ncon.f
 c3aea6798b06fc9724ea8db78374a34a *src/mi81ncon.f
-53b370b8a53e56fa1b9758c682819d4e *src/qp.f
+08cd094277cc5b322ff6c24d94c90e6e *src/qp.f

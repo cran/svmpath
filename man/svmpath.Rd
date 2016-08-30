@@ -12,7 +12,8 @@ solution changes), with a cost a small (~3)  multiple of the cost of fitting a
 single model.
 }
 \usage{
-svmpath(x, y, K, kernel.function = poly.kernel, param.kernel = 1, trace, plot.it, eps = 1e-10, Nmoves = 3 * n, digits = 6, lambda.min = 1e-04,ridge=0, ...)
+svmpath(x, y, K, kernel.function = poly.kernel, param.kernel = 1, trace,
+  plot.it, eps = 1e-10, Nmoves = 3 * n, digits = 6, lambda.min = 1e-04,ridge=0, ...)
 }
 \arguments{
   \item{x}{the data matrix (n x p) with n rows (observations) on p

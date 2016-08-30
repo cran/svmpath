@@ -1,4 +1,4 @@
-      subroutine qp ( xn, n, zsmall, lenz, inform ) 
+      subroutine qp ( xn, n, zsmall, lenz, inform )
 
       implicit           double precision (a-h,o-z)
       integer            n, lenz, inform
@@ -8,11 +8,14 @@
       parameter          (nwcore = 10000000)
 *     ------------------------------------------------------------------
       integer            m, nb, ne, nname,
-     &                   nncon, nnobj, nnjac, iobj,  
-     &                   mincor, ns, ninf, 
+     &                   nncon, nnobj, nnjac, iobj,
+     &                   mincor, ns, ninf,
      &                   ka(n+1), name1, name2,
      &                   iprint, isumm, ispecs, i
-      integer*4          ha(n), hs(n+1)
+*     ------ CRAN warning
+*     integer*4          ha(n), hs(n+1)
+*     -----------
+      integer            ha(n), hs(n+1)
       double precision   objadd, sinf, obj,
      &                   a(n), bl(n+1), bu(n+1),
      &                   pi(1), rc(n+1), z(nwcore)
@@ -24,7 +27,7 @@
       iprint = 0   ! The MINOS PRINT   file.
       isumm  = 0   ! The MINOS SUMMARY file.
       ispecs = 0   ! The MINOS SPECS   file.
-      
+
       call mistart( iprint, isumm, ispecs )  ! Initialize MINOS and open
       call miopti( 'Workspace (user) ', lenz, 0, 0, inform )
       call miopti( 'LOG FREQUENCY ', 0, 0, 0, inform )
@@ -67,7 +70,7 @@
      $             nncon, nnobj, nnjac,
      $             iobj, objadd, names,
      $             a, ha, ka, bl, bu, name1, name2,
-     $             hs, xn, pi, rc, 
+     $             hs, xn, pi, rc,
      $             inform, mincor, ns, ninf, sinf, obj,
      $             z, nwcore )
 
@@ -83,7 +86,7 @@
       double precision   x(n), f, g(n), z(nwcore)
 
       integer            i, j, ii
-      double precision   Q(n,n), cvec(n), grad, ddot  
+      double precision   Q(n,n), cvec(n), grad, ddot
       double precision   zero,          one,          two
       parameter         (zero = 0.0d+0, one = 1.0d+0, two = 2.0d+0)
 
@@ -117,10 +120,10 @@
       end
 
 ******************************************************************************
-*     inform  says what happened; see Chapter 6.3 of the User's Guide.       
-*             A summary of possible values follows:                          
-*                                                                            
-*             inform   Meaning                                               
+*     inform  says what happened; see Chapter 6.3 of the User's Guide.
+*             A summary of possible values follows:
+*
+*             inform   Meaning
 *
 *                0     Optimal solution found.
 *                1     The problem is infeasible.
