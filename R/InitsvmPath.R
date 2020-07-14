@@ -1,18 +1,9 @@
 "InitsvmPath" <-
   function(Rmat, cvec, const)
-  {
+{
+###uses package kernlab
     n <- length(cvec)
-    zsmall <- c(Rmat, cvec, const)
-    lenz <- length(zsmall)
-    sol <- .Fortran("qp",
-                    xn = as.double(rep(0,n+1)),
-                    n = as.integer(n),
-                    zsmall = as.double(zsmall),
-                    lenz = as.integer(lenz),
-                    inform = as.integer(0),
-                    PACKAGE="svmpath"
-                    )
-    if (sol$inform!=0) print("convergence warning in initialization\n")
-    list(alpha=sol$xn[1:n], obj=sol$zsmall[lenz])
+    sol <- ipop(c=cvec,H=Rmat,A=matrix(1,1,n),b=const,l=rep(0,n),u=rep(1,n),r=0,margin=1e-5)
+    list(alpha=sol@primal)
   }
 

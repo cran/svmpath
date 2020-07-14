@@ -1,7 +1,7 @@
-useDynLib("svmpath")
 importFrom(utils,head,tail,packageDescription)
+importFrom("kernlab","ipop")
 export(svmpath,
-summary.svmpath,radial.kernel,poly.kernel,print.svmpath,predict.svmpath,plot.svmpath,modulus,get.svmstep,enlist,coef.svmpath,UpdateKstar,Unbalanced.Initialization,StatPath,SolveKstar,SnapPath,PrintPath,OptInit.alpha,InitsvmPath,DowndateKstar,Balanced.Initialization)
+summary.svmpath,radial.kernel,poly.kernel,print.svmpath,predict.svmpath,plot.svmpath,modulus,get.svmstep,enlist,coef.svmpath,UpdateKstar,Unbalanced.Initialization,StatPath,SolveKstar,SnapPath,PrintPath,InitsvmPath,DowndateKstar,Balanced.Initialization)
 importFrom("grDevices", "dev.off", "jpeg")
 importFrom("graphics", "abline", "contour", "plot", "points", "text","title")
 importFrom("stats", "approx", "predict")
